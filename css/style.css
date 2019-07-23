@@ -134,7 +134,7 @@ li {
 }
 
 #menu li a:hover {
-  color: #1C77C3;
+  color: #115d80;
 }
 
 #menu-toggle:checked + #trigger + #burger {
