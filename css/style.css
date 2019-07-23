@@ -5,8 +5,10 @@ html, body {
     /* height: 100%; */
 }
 
+/* Edit the Index page styles */
+
 #homePage {
-  /* background: url(../images/background_image2.png); */
+  background: url(../images/background_image.png);
   /* width: 100%; */
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,19 +18,27 @@ html, body {
   font-family: 'Varela Round', sans-serif;
 }
 
+/* The block containing the get started button and some getter text */
 .content {
   text-align: center;
   width: 100%;
   z-index: 1;
 }
 
-.content h2 {
+/* The getter text */
+.content h1 {
   font-size: 32px;
   font-weight: 600;
-  color: #1C77C3;
+  color: #222;
   font-family: sans-serif;
+  padding: 15px 5px;
 }
 
+.content h1 span {
+  color: #39A9DB;
+}
+
+/* The main starter button  */
 .main_button {
   color: #39A9DB;
   font-family: sans-serif;
@@ -36,9 +46,8 @@ html, body {
   font-size: 22px;
   text-decoration: none;
   border: 1px solid #39A9DB;
-  border-radius: 5px;
-  padding: 5px 25px;
-  /* transition: 0.5s ease-in-out; */
+  border-radius: 25px;
+  padding: 10px 30px;
 }
 
 .main_button:hover {
@@ -115,6 +124,19 @@ li {
     top: 20px;
     left: 0;
 }
+
+#menu li a {
+  color: #39A9DB;
+  font-family: sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 10px 30px;
+}
+
+#menu li a:hover {
+  color: #1C77C3;
+}
+
 #menu-toggle:checked + #trigger + #burger {
     top: 35px;
     transform: rotate(180deg);
