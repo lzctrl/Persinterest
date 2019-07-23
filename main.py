@@ -17,7 +17,6 @@ class WelcomePage(webapp2.RequestHandler):
         welcome_page = jinja_env.get_template('index.html')
         self.response.write(welcome_page.render())
 
-
 # the app configuration section
 app = webapp2.WSGIApplication(
     [('/', WelcomePage)], debug = True
