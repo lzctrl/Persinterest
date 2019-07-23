@@ -17,7 +17,12 @@ class WelcomePage(webapp2.RequestHandler):
         welcome_page = jinja_env.get_template('index.html')
         self.response.write(welcome_page.render())
 
+class PersonalityTestPage(webapp2.RequestHandler):
+    def get(self):
+        personality_test_page = jinja_env.get_template('pages/personalitytest.html')
+        self.response.write(personality_test_page.render())
+
 # the app configuration section
 app = webapp2.WSGIApplication(
-    [('/', WelcomePage)], debug = True
+    [('/', WelcomePage), ('/pages/personalitytest', PersonalityTestPage)], debug = True
 )
