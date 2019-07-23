@@ -1,7 +1,21 @@
+#homePage {
+  /* background: url(../images/background_lightbulb.png); */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .content {
   text-align: center;
 }
 
 .main_button {
   color: black;
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 }
