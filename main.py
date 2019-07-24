@@ -5,7 +5,7 @@ import os #apple operating system
 # import json
 from google.appengine.api import users
 from google.appengine.ext import ndb
-
+from personalityTest import answersStore
 #jinja2.Environment is a constructor
 
 class TestUser(ndb.Model):
@@ -17,6 +17,7 @@ jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
+
 
 class WelcomePage(webapp2.RequestHandler):
     def get(self):
@@ -39,16 +40,29 @@ class PersonalityTestPage(webapp2.RequestHandler):
         self.response.write(personality_test_page.render(personalitytest))
 
 
-        # def post(self):
-        #     answer1 =
-        #     answer2 =
-        #     answer3 =
-        #     answer4 =
 
 class AboutPage(webapp2.RequestHandler):
     def get(self):
         about_page = jinja_env.get_template('pages/about.html')
         self.response.write(about_page.render())
+    def post(self):
+        answer1 = self.request.get("template")
+        answer2 = self.request.get("template2")
+        answer3 = self.request.get("template3")
+        answer4 = self.request.get("template4")
+        answer5 = self.request.get("template5")
+        answer_store = answersStore(a1 = answer1, a2 = answer2, a3 = answer3, a4 = answer4, a5 = answer5)
+        answer_store.put()
+        data = {
+            "user_answer" : [answer1, answer2, answer3, answer4, answer5]
+                # "user_answer1": answer1,
+                # "user_answer2": answer2,
+                # "user_answer3": answer3,
+                # "user_answer4": answer4,
+                # "user_answer5": answer5
+        }
+        about_template = jinja_env.get_template('pages/about.html')
+        self.response.write(about_template.render(data))
 
 class ConnectionsPage(webapp2.RequestHandler):
     def get(self):

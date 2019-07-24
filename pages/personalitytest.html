@@ -12,6 +12,7 @@
   <title>Test</title>
 </head>
 <body>
+  <form action="/pages/about" method="post">
   <div class="">
     {%for choices1 in question1%}
         <input type="radio" name = "template" value = "{{choices1}}"/>
@@ -58,6 +59,7 @@
   <br>
   <input type="submit" value="Submit">
 
+  </form>
 
   <br/>
   <a href="/pages/results">Results</a>
