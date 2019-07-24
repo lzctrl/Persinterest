@@ -12,6 +12,54 @@
   <title>Test</title>
 </head>
 <body>
+  <div class="">
+    {%for choices1 in question1%}
+        <input type="radio" name = "template" value = "{{choices1}}"/>
+        {{choices1|safe}}
+      <br>
+    {%endfor%}
+  </div>
+    <br/>
+    <br/>
+  <div class="">
+    {%for choices2 in question2%}
+        <input type="radio" name = "template2" value = "{{choices2}}"/>
+        {{choices2|safe}}
+        <br>
+    {%endfor%}
+  </div>
+    <br/>
+    <br/>
+  <div class="">
+    {%for choices3 in question3%}
+        <input type="radio" name = "template3" value = "{{choices3}}"/>
+        {{choices3|safe}}
+        <br>
+    {%endfor%}
+  </div>
+    <br/>
+    <br/>
+  <div class="">
+    {%for choices4 in question4%}
+        <input type="radio" name = "template4" value = "{{choices4}}"/>
+        {{choices4|safe}}
+        <br>
+    {%endfor%}
+  </div>
+    <br/>
+    <br/>
+  <div class="">
+    {%for choices5 in question5%}
+        <input type="radio" name = "template5" value = "{{choices5}}"/>
+        {{choices5|safe}}
+        <br>
+    {%endfor%}
+  </div>
+  <br>
+  <input type="submit" value="Submit">
+
+
+  <br/>
   <a href="/pages/results">Results</a>
 </body>
 </html>
