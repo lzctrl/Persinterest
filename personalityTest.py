@@ -1,3 +1,13 @@
+from google.appengine.ext import ndb
+class answersStore(ndb.Model):
+    a1 = ndb.StringProperty(required=True)
+    a2 = ndb.StringProperty(required=True)
+    a3 = ndb.StringProperty(required=True)
+    a4 = ndb.StringProperty(required=True)
+    a5 = ndb.StringProperty(required=True)
+
+
+
 # blueWords = [
 #     ["Authentic", "Harmonious", "Compassionate"],
 #     ["Unique", "Empathetic", "Communicative"],
@@ -73,38 +83,38 @@
 #     if gold > orange:
 #         if gold > green:
 #             print("Gold")
-# from googleappengine.ext import ndb
 
-class Questions:
-    adjectives_dict = { blueWords : [
-        ["Authentic", "Harmonious", "Compassionate"],
-        ["Unique", "Empathetic", "Communicative"],
-        ["Devoted", "Warm", "Personable"],
-        ["Loving", "Inspirational", "Dramatic"],
-        ["Vivacious", "Affectionate", "Sympathetic"]
-    ]
 
-    orangeWords : [
-        ["Active", "Opportunistic", "Spontaneous"],
-        ["Competitive", "Impetuous", "Impactful"],
-        ["Realistic", "Open-Minded", "Adventuresome"],
-        ["Daring", "Impulsive", "Fun"],
-        ["Exciting", "Courageous", "Skillful"]
-    ]
-
-    greenWords : [
-        ["Versatile", "Inventive", "Competent"],
-        ["Curious", "Conceptual", "Knowledgeable"],
-        ["Theoretical", "Seeking", "Ingenious"],
-        ["Determined", "Complex", "Composed"],
-        ["Determined", "Principled", "Rational"]
-    ]
-
-    goldWords : [
-        ["Parental", "Traditional", "Responsible"],
-        ["Practical", "Sensible", "Dependable"],
-        ["Loyal", "Conservative", "Organized"],
-        ["Concerned", "Procedural", "Cooperative"],
-        ["Orderly", "Habitual", "Caring"]
-    ]
-    }
+# class Questions:
+#     adjectives_dict = { blueWords : [
+#         ["Authentic", "Harmonious", "Compassionate"],
+#         ["Unique", "Empathetic", "Communicative"],
+#         ["Devoted", "Warm", "Personable"],
+#         ["Loving", "Inspirational", "Dramatic"],
+#         ["Vivacious", "Affectionate", "Sympathetic"]
+#     ]
+#
+#     orangeWords : [
+#         ["Active", "Opportunistic", "Spontaneous"],
+#         ["Competitive", "Impetuous", "Impactful"],
+#         ["Realistic", "Open-Minded", "Adventuresome"],
+#         ["Daring", "Impulsive", "Fun"],
+#         ["Exciting", "Courageous", "Skillful"]
+#     ]
+#
+#     greenWords : [
+#         ["Versatile", "Inventive", "Competent"],
+#         ["Curious", "Conceptual", "Knowledgeable"],
+#         ["Theoretical", "Seeking", "Ingenious"],
+#         ["Determined", "Complex", "Composed"],
+#         ["Determined", "Principled", "Rational"]
+#     ]
+#
+#     goldWords : [
+#         ["Parental", "Traditional", "Responsible"],
+#         ["Practical", "Sensible", "Dependable"],
+#         ["Loyal", "Conservative", "Organized"],
+#         ["Concerned", "Procedural", "Cooperative"],
+#         ["Orderly", "Habitual", "Caring"]
+#     ]
+#     }
