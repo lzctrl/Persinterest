@@ -3,9 +3,15 @@ import jinja2 #connets to the html files
 import os #apple operating system
 # from google.appengine.api import urlfetch
 # import json
-# from PersonalityTestPage import Questions
+from google.appengine.api import users
+from google.appengine.ext import ndb
 
 #jinja2.Environment is a constructor
+
+class TestUser(ndb.Model):
+    first_name = ndb.StringProperty(required = True)
+    last_initial = ndb.StringProperty(required = True)
+    email = ndb.StringProperty(required = True)
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -54,8 +60,59 @@ class ResultsPage(webapp2.RequestHandler):
         results_page = jinja_env.get_template('pages/results.html')
         self.response.write(results_page.render())
 
+    def post(self):
+        user = users.get_current_user()
+        print("WE ARE HERE 3")
+        test_user = TestUser(
+            first_name=self.request.get('first_name'),
+            last_initial=self.request.get('last_initial'),
+            email = user.nickname()
+        )
+        test_user.put()
+        # results_page = jinja_env.get_template('pages/results.html')
+        # self.response.write(results_page.render())
+
+class NewUserPage(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+
+        if user:
+            email_address = user.nickname()
+            logout_url = users.create_logout_url('/pages/results')
+            logout_button = '<a href="%s"> Log out</a>' % logout_url
+
+            existing_user = TestUser.query().filter(TestUser.email == email_address).get()
+            if existing_user:
+                #takes them to the results page/connection page with others
+                results_page = jinja_env.get_template('pages/results.html')
+                self.response.write(results_page.render())
+            else:
+                #insert a "not registered yet?" prompt with a redirection to this please register page
+                login_url = users.create_login_url('/pages/results')
+                login_button = '<a href="%s"> Sign In</a>' % login_url
+                # login_button = '<a href="' + login_url + '"> Sign In</a>'
+                self.response.write("Please login: " + login_button + "<br>We are here");
+
+        else:
+            login_url = users.create_login_url('/pages/results')
+            login_button = '<a href="%s"> Sign In</a>' % login_url
+            # login_button = '<a href="' + login_url + '"> Sign In</a>'
+            self.response.write(login_url)
+
+    def post(self):
+        user = users.get_current_user()
+        print("WE ARE HERE 4")
+        test_user = TestUser(
+            first_name=self.request.get('first_name'),
+            last_initial=self.request.get('last_initial'),
+            email = user.nickname()
+        )
+        test_user.put()
+        # results_page = jinja_env.get_template('pages/results.html')
+        # self.response.write(results_page.render())
+
 # the app configuration section
 app = webapp2.WSGIApplication(
-    [('/', WelcomePage), ('/pages/personalitytest', PersonalityTestPage), ('/pages/about', AboutPage), ('/pages/connections', ConnectionsPage), ('/pages/results', ResultsPage)],
+    [('/', WelcomePage), ('/pages/newUser', NewUserPage), ('/pages/personalitytest', PersonalityTestPage), ('/pages/about', AboutPage), ('/pages/connections', ConnectionsPage), ('/pages/results', ResultsPage)],
     debug = True
 )
