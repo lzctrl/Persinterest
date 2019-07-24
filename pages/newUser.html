@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Sign Up</title>
-  </head>
-  <body>
-    <div class="content">
+<head>
+  <meta charset="utf-8">
+  <title>Sign Up</title>
+</head>
+<body>
+  <div class="content">
+    {% if isUser == False %}
+    <a href="{{url}}">Sign In</a>
+    {% endif %}
+    {% if isUser == True %}
       <p>You don't exist!!!</p>
       <form method='post' action='/pages/results'>
-          First Name: <input type='text' name='{{first_name}}'>
-          Last Initial: <input type='text' maxlength='1' name='{{last_initial}}'>
-          <input type='submit'>
+        First Name: <input type='text' name='{{first_name}}'>
+        Last Initial: <input type='text' maxlength='1' name='{{last_initial}}'>
+        <input type='submit'>
       </form>
-    </div>
-  </body>
+    {% endif %}
+  </div>
+</body>
 </html>

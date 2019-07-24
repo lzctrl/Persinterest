@@ -16,9 +16,13 @@
   <label id="trigger" for="menu-toggle"></label>
   <label id="burger" for="menu-toggle"></label>
   <ul id="menu">
-    <li><a href="/pages/newUser">Sign In</a></li>
+    <li><a href="/pages/newUser">{{status}}</a></li>
     <li><a href="/pages/connections">Connections</a></li>
     <li><a href="/pages/about">About</a></li>
+    <li> <a href="#">Settings</a> </li>
+    {% if isSignedIn == True %}
+      <li> <a href="{{url}}">Log Out</a> </li>
+    {% endif %}
   </ul>
   <!-- The content of the home page -->
   <div class="content centered">
