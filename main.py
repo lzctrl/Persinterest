@@ -32,8 +32,13 @@ class ConnectionsPage(webapp2.RequestHandler):
         connections_page = jinja_env.get_template('pages/connections.html')
         self.response.write(connections_page.render())
 
+class ResultsPage(webapp2.RequestHandler):
+    def get(self):
+        results_page = jinja_env.get_template('pages/results.html')
+        self.response.write(results_page.render())
+
 # the app configuration section
 app = webapp2.WSGIApplication(
-    [('/', WelcomePage), ('/pages/personalitytest', PersonalityTestPage), ('/pages/about', AboutPage), ('/pages/connections', ConnectionsPage)], 
+    [('/', WelcomePage), ('/pages/personalitytest', PersonalityTestPage), ('/pages/about', AboutPage), ('/pages/connections', ConnectionsPage), ('/pages/results', ResultsPage)],
     debug = True
 )
