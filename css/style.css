@@ -5,7 +5,9 @@ html, body {
     /* height: 100%; */
 }
 
-/* Edit the Index page styles */
+/* ===============================================================================
+Index page
+=============================================================================== */
 
 #homePage {
   background: url(../images/background_image.png);
@@ -178,4 +180,43 @@ li {
 }
 [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
     display: none;
+}
+
+
+/* ===============================================================================
+Connections page
+=============================================================================== */
+
+.connectContent {
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.row {
+  height: 50%;
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.col {
+  border: 1px solid black;
+  width: 50%;
+  min-height: 50px;
+  /* height: 100px; */
+}
+
+.userObj {
+  margin: 10px 15px;
+  padding: 5px;
+  border: 1px solid red;
+}
+
+/* ===============================================================================
+Results page
+=============================================================================== */
+
+.resultsContent {
+  margin-left: 200px;
+  margin-right: 200px;
 }
