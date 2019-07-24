@@ -6,6 +6,24 @@ html, body {
 }
 
 /* ===============================================================================
+All
+=============================================================================== */
+
+.row {
+  /* height: 50%; */
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.col {
+  border: 1px solid black;
+  width: 50%;
+  min-height: 50px;
+  /* height: 100px; */
+}
+
+/* ===============================================================================
 Index page
 =============================================================================== */
 
@@ -192,20 +210,6 @@ Connections page
   margin-right: 200px;
 }
 
-.row {
-  height: 50%;
-  display: flex;
-  /* align-items: center; */
-  /* justify-content: center; */
-}
-
-.col {
-  border: 1px solid black;
-  width: 50%;
-  min-height: 50px;
-  /* height: 100px; */
-}
-
 .userObj {
   margin: 10px 15px;
   padding: 5px;
@@ -219,4 +223,32 @@ Results page
 .resultsContent {
   margin-left: 200px;
   margin-right: 200px;
+}
+
+.interestsResults {
+  margin: 5px 10px;
+  border: 1px solid red;
+}
+
+.interestWord {
+  display: inline-block;
+  padding: 5px 8px;
+  margin: 5px;
+  border: 1px solid blue;
+  border-radius: 5px;
+}
+
+.interestWord:hover{
+  background-color: blue;
+  color: white;
+}
+
+.resultsImages {
+  width: 100%;
+  text-align: center;
+}
+
+.resultsImages img {
+  margin: 5px;
+  width: 75%;
 }
