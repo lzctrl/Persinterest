@@ -36,10 +36,12 @@ class WelcomePage(webapp2.RequestHandler):
             user_status = ""
             logout_url = ""
             goToURL = ""
-            hasTakenTest = False
+            currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
+            print(currentUser)
+            print(currentUser.hasTakenTest)
 
             if existing_user:
-                if hasTakenTest == True:
+                if currentUser.hasTakenTest == True:
                     user_status = "Results"
                     goToURL = "/pages/results"
                 else:
@@ -96,10 +98,11 @@ class WelcomePage(webapp2.RequestHandler):
             user_status = ""
             logout_url = ""
             goToURL = ""
-            hasTakenTest = False
-
+            currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
+            print(currentUser)
+            print(currentUser.hasTakenTest)
             if existing_user:
-                if hasTakenTest == True:
+                if currentUser.hasTakenTest == True:
                     user_status = "Results"
                     goToURL = "/pages/results"
                 else:
@@ -182,7 +185,17 @@ class ResultsPage(webapp2.RequestHandler):
         elif(list_colors.index(max_value) == 3):
             color_store = answersStore(color = "Gold")
 
+        user = users.get_current_user()
+        email_address = user.nickname()
+
         # user_array.put()
+        currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
+        print(currentUser)
+        print(currentUser.hasTakenTest)
+        currentUser.hasTakenTest = True
+
+        currentUser.put()
+
         color_store.put()
         data = {
             "user_color" : color_store.color
