@@ -176,14 +176,16 @@ class ResultsPage(webapp2.RequestHandler):
         else:
             max_value = max(list_colors)
 
+        user_color = ""
+
         if(list_colors.index(max_value) == 0):
-            color_store = answersStore(color = "Blue")
+            user_color = "Blue"
         elif(list_colors.index(max_value) == 1):
-            color_store = answersStore(color = "Orange")
+            user_color = "Orange"
         elif(list_colors.index(max_value) == 2):
-            color_store = answersStore(color = "Green")
+            user_color = "Green"
         elif(list_colors.index(max_value) == 3):
-            color_store = answersStore(color = "Gold")
+            user_color = "Gold"
 
         user = users.get_current_user()
         email_address = user.nickname()
@@ -193,17 +195,16 @@ class ResultsPage(webapp2.RequestHandler):
         print(currentUser)
         print(currentUser.hasTakenTest)
         currentUser.hasTakenTest = True
+        currentUser.color = user_color
 
         currentUser.put()
-
-        color_store.put()
         data = {
-            "user_color" : color_store.color
+            "user_color" : user_color
             # "user_all_answers" : user_answers
         }
 
-        about_template = jinja_env.get_template('pages/about.html')
-        self.response.write(about_template.render(data))
+        results_template = jinja_env.get_template('pages/results.html')
+        self.response.write(results_template.render(data))
 
 class NewUserPage(webapp2.RequestHandler):
     def get(self):
