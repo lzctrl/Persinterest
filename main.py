@@ -1,9 +1,8 @@
 import webapp2  #connecting to the google app engine yaml file
 import jinja2 #connets to the html files
 import os #apple operating system
-from personalityTest import looping_through
-from personalityTest import answersStore
-from personalityTest import userAnswers
+import random
+from personalityTest import looping_through, answersStore, userInterests, choosing_interests
 from google.appengine.api import users
 from google.appengine.ext import ndb
 from models import GoogleUser
@@ -16,7 +15,25 @@ personalitytest = {
 "question4": ["Loving <br> Inspirational<br> Dramatic", "Daring <br> Impulsive <br> Fun", "Determined <br> Complex <br> Composed","Concerned <br> Procedural <br> Cooperative"],
 "question5": ["Vivacious <br> Affectionate <br> Sympathetic", "Exciting <br> Courageous <br> Skillful", "Determined <br> Principled <br> Rational", "Orderly <br> Habitual <br> Caring"]
 }
+personalityresults = {
+    "blue_hobbies" : ["Social Events", "Camp Counselor", "Volunteering", "Activism"],
+    "blue_education_and_careers": ["Consultant", "Human Resources Manager", "Therapist", "Journalist", "Social Worker", "Flight Attendant", "Tour Guide", "Teacher", "Environmentalist"],
+    "blue_music" :["Love Songs", "Pop Genre"],
+    "blue_living_and_travel": ["Living in the suburbs", "Yosemite National Park", "Yellowstone National Park", "New Zealand", "Grand Canyon", "Iceland", "Canada"],
+    "orange_hobbies" : ["Football", "Basketball", "Hockey", "Skydiving", "Rollercoasters"],
+    "orange_education_and_careers": ["Entrepreneur", "Marketing", "Advertising", "Actor", "Painter", "Comedian", "Dance Teacher"],
+    "orange_music" :["Rap Genre", "Rock Genre"],
+    "orange_living_and_travel": ["Living in the city", "Hong Kong", "Dubai", "Tokyo", "Seoul", "New York", "Miami"],
+    "green_hobbies" : ["Chess", "Golf", "Photography", "Reading", "Rocket Science"],
+    "green_education_and_careers": ["Attorney", "Researcher", "Engineer", "Veterinarian", "Physician", "FBI Agent"],
+    "green_music" :["Classical Genre", "Podcasts"],
+    "green_living_and_travel": ["Living in the city", "Silicon Valley", "New York", "Austin", "Chicago", "Seattle", "Zurich", "London", "Beijing" ],
+    "gold_hobbies" : ["Soccer", "Volunteering", "Personal Projects", "Organizing Events"],
+    "gold_education_and_careers": ["Accountant", "Financial Planner", "Manager", "Statistical Clerk", "Secretary", "Bank Officer", "Auditor"],
+    "gold_music" :["Classical Genre", "Pop Genre"],
+    "gold_living_and_travel": ["Living in mid-sized cities", "Boston", "Ann Arbor", "New England", "Toronto", "Rome", "Portland", "Syracuse"]
 
+}
 #jinja2.Environment is a constructor
 
 jinja_env = jinja2.Environment(
@@ -173,21 +190,60 @@ class ResultsPage(webapp2.RequestHandler):
         else:
             max_value = max(list_colors)
 
+
+
         if(list_colors.index(max_value) == 0):
             color_store = answersStore(color = "Blue")
+            color_interest = userInterests(hobbies = choosing_interests("blue_hobbies"),
+                                        living_and_travel =choosing_interests("blue_living_and_travel"),
+                                        education_and_careers=choosing_interests("blue_education_and_careers"),
+                                        music=choosing_interests("blue_music"),)
         elif(list_colors.index(max_value) == 1):
             color_store = answersStore(color = "Orange")
+            color_interest = userInterests(hobbies = choosing_interests("orange_hobbies"),
+                                        living_and_travel =choosing_interests("orange_living_and_travel"),
+                                        education_and_careers=choosing_interests("orange_education_and_careers"),
+                                        music=choosing_interests("orange_music"),)
         elif(list_colors.index(max_value) == 2):
             color_store = answersStore(color = "Green")
+            color_interest = userInterests(hobbies = choosing_interests("green_hobbies"),
+                                        living_and_travel =choosing_interests("green_living_and_travel"),
+                                        education_and_careers=choosing_interests("green_education_and_careers"),
+                                        music=choosing_interests("green_music"),)
         elif(list_colors.index(max_value) == 3):
             color_store = answersStore(color = "Gold")
+            color_interest = userInterests(hobbies = choosing_interests("gold_hobbies"),
+                                        living_and_travel =choosing_interests("gold_living_and_travel"),
+                                        education_and_careers=choosing_interests("gold_education_and_careers"),
+                                        music=choosing_interests("gold_music"),)
 
         # user_array.put()
         color_store.put()
+        color_interest.put()
         data = {
-            "user_color" : color_store.color
+            "user_color" : color_store.color,
+            "user_hobbies" : color_interest.hobbies,
+            "user_living_and_travel": color_interest.living_and_travel,
+            "user_education_and_careers": color_interest.education_and_careers,
+            "user_music":color_interest.music
             # "user_all_answers" : user_answers
         }
+
+        # if(list_colors.index(max_value) == 0):
+        #     color_store = answersStore(color = "Blue")
+        # elif(list_colors.index(max_value) == 1):
+        #     color_store = answersStore(color = "Orange")
+        # elif(list_colors.index(max_value) == 2):
+        #     color_store = answersStore(color = "Green")
+        # elif(list_colors.index(max_value) == 3):
+        #     color_store = answersStore(color = "Gold")
+        #
+        # # user_array.put()
+        # color_store.put()
+        # data = {
+        #     "user_color" : color_store.color
+        #     # "user_all_answers" : user_answers
+        # }
 
         about_template = jinja_env.get_template('pages/about.html')
         self.response.write(about_template.render(data))

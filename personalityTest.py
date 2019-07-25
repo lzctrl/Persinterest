@@ -1,12 +1,12 @@
 from google.appengine.ext import ndb
+import random
 class answersStore(ndb.Model):
     color = ndb.StringProperty(required=True)
-class userAnswers(ndb.Model):
-    a1 = ndb.StringProperty(required=True)
-    a2 = ndb.StringProperty(required=True)
-    a3 = ndb.StringProperty(required=True)
-    a4 = ndb.StringProperty(required=True)
-    a5 = ndb.StringProperty(required=True)
+class userInterests(ndb.Model):
+    hobbies = ndb.StringProperty(required=True)
+    living_and_travel = ndb.StringProperty(required=True)
+    education_and_careers = ndb.StringProperty(required=True)
+    music = ndb.StringProperty(required=True)
 personalitytest = {
     # index 0 = blueWords, 1 = orangeWords, 2 = greenWords, 3 = goldWords
 "question1": ["Authentic <br> Harmonious <br> Compassionate", "Active <br> Opportunistic <br> Spontaneous", "Versatile <br> Inventive <br> Competent", "Parental <br> Traditional <br> Responsible"],
@@ -23,116 +23,32 @@ def looping_through(question_num, compare_to):
             return personalitytest[question_num].index(x)
 
 
+personalityresults = {
+    "blue_hobbies" : ["Social Events", "Camp Counselor", "Volunteering", "Activism"],
+    "blue_education_and_careers": ["Consultant", "Human Resources Manager", "Therapist", "Journalist", "Social Worker", "Flight Attendant", "Tour Guide", "Teacher", "Environmentalist"],
+    "blue_music" :["Love Songs", "Pop Genre"],
+    "blue_living_and_travel": ["Living in the suburbs", "Yosemite National Park", "Yellowstone National Park", "New Zealand", "Grand Canyon", "Iceland", "Canada"],
+    "orange_hobbies" : ["Football", "Basketball", "Hockey", "Skydiving", "Rollercoasters"],
+    "orange_education_and_careers": ["Entrepreneur", "Marketing", "Advertising", "Actor", "Painter", "Comedian", "Dance Teacher"],
+    "orange_music" :["Rap Genre", "Rock Genre"],
+    "orange_living_and_travel": ["Living in the city", "Hong Kong", "Dubai", "Tokyo", "Seoul", "New York", "Miami"],
+    "green_hobbies" : ["Chess", "Golf", "Photography", "Reading", "Rocket Science"],
+    "green_education_and_careers": ["Attorney", "Researcher", "Engineer", "Veterinarian", "Physician", "FBI Agent"],
+    "green_music" :["Classical Genre", "Podcasts"],
+    "green_living_and_travel": ["Living in the city", "Silicon Valley", "New York", "Austin", "Chicago", "Seattle", "Zurich", "London", "Beijing" ],
+    "gold_hobbies" : ["Soccer", "Volunteering", "Personal Projects", "Organizing Events"],
+    "gold_education_and_careers": ["Accountant", "Financial Planner", "Manager", "Statistical Clerk", "Secretary", "Bank Officer", "Auditor"],
+    "gold_music" :["Classical Genre", "Pop Genre"],
+    "gold_living_and_travel": ["Living in mid-sized cities", "Boston", "Ann Arbor", "New England", "Toronto", "Rome", "Portland", "Syracuse"]
+
+}
+def choosing_interests(category):
+    choose = random.randint(0, len(personalityresults[category])-1)
+    interest = personalityresults[category]
+    return interest[choose]
+
+print(choosing_interests("gold_hobbies"))
+
+
+
 #print(looping_through("question1", "Versatile <br> Inventive <br> Competent"))
-
-
-# blueWords = [
-#     ["Authentic", "Harmonious", "Compassionate"],
-#     ["Unique", "Empathetic", "Communicative"],
-#     ["Devoted", "Warm", "Personable"],
-#     ["Loving", "Inspirational", "Dramatic"],
-#     ["Vivacious", "Affectionate", "Sympathetic"]
-# ]
-#
-# orangeWords = [
-#     ["Active", "Opportunistic", "Spontaneous"],
-#     ["Competitive", "Impetuous", "Impactful"],
-#     ["Realistic", "Open-Minded", "Adventuresome"],
-#     ["Daring", "Impulsive", "Fun"],
-#     ["Exciting", "Courageous", "Skillful"]
-# ]
-#
-# greenWords = [
-#     ["Versatile", "Inventive", "Competent"],
-#     ["Curious", "Conceptual", "Knowledgeable"],
-#     ["Theoretical", "Seeking", "Ingenious"],
-#     ["Determined", "Complex", "Composed"],
-#     ["Determined", "Principled", "Rational"]
-# ]
-#
-# goldWords = [
-#     ["Parental", "Traditional", "Responsible"],
-#     ["Practical", "Sensible", "Dependable"],
-#     ["Loyal", "Conservative", "Organized"],
-#     ["Concerned", "Procedural", "Cooperative"],
-#     ["Orderly", "Habitual", "Caring"]
-# ]
-#
-# blue = 0
-# orange = 0
-# green = 0
-# gold = 0
-#
-#
-# current = 0
-#
-# while current < 5:
-#     print("1. " + str(blueWords[current]))
-#     print("2. " + str(orangeWords[current]))
-#     print("3. " + str(greenWords[current]))
-#     print("4. " + str(goldWords[current]))
-#
-#     choice = raw_input("Which set of words best describes who you are? ")
-#
-#     if choice == "1":
-#         blue = blue + 1
-#     if choice == "2":
-#         orange = orange + 1
-#     if choice == "3":
-#         green = green + 1
-#     if choice == "4":
-#         gold = gold + 1
-#
-#     current += 1
-#
-# if blue > orange:
-#     if blue > green:
-#         if blue > gold:
-#             print("Blue")
-# if orange > blue:
-#     if orange > green:
-#         if orange > gold:
-#             print("Orange")
-# if green > blue:
-#     if green > orange:
-#         if green > gold:
-#             print("Green")
-# if gold > blue:
-#     if gold > orange:
-#         if gold > green:
-#             print("Gold")
-
-
-# class Questions:
-#     adjectives_dict = { blueWords : [
-#         ["Authentic", "Harmonious", "Compassionate"],
-#         ["Unique", "Empathetic", "Communicative"],
-#         ["Devoted", "Warm", "Personable"],
-#         ["Loving", "Inspirational", "Dramatic"],
-#         ["Vivacious", "Affectionate", "Sympathetic"]
-#     ]
-#
-#     orangeWords : [
-#         ["Active", "Opportunistic", "Spontaneous"],
-#         ["Competitive", "Impetuous", "Impactful"],
-#         ["Realistic", "Open-Minded", "Adventuresome"],
-#         ["Daring", "Impulsive", "Fun"],
-#         ["Exciting", "Courageous", "Skillful"]
-#     ]
-#
-#     greenWords : [
-#         ["Versatile", "Inventive", "Competent"],
-#         ["Curious", "Conceptual", "Knowledgeable"],
-#         ["Theoretical", "Seeking", "Ingenious"],
-#         ["Determined", "Complex", "Composed"],
-#         ["Determined", "Principled", "Rational"]
-#     ]
-#
-#     goldWords : [
-#         ["Parental", "Traditional", "Responsible"],
-#         ["Practical", "Sensible", "Dependable"],
-#         ["Loyal", "Conservative", "Organized"],
-#         ["Concerned", "Procedural", "Cooperative"],
-#         ["Orderly", "Habitual", "Caring"]
-#     ]
-#     }
