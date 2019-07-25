@@ -1,12 +1,12 @@
 import webapp2  #connecting to the google app engine yaml file
 import jinja2 #connets to the html files
 import os #apple operating system
-# from google.appengine.api import urlfetch
-# import json
 from personalityTest import looping_through
 from personalityTest import answersStore
 from personalityTest import userAnswers
-
+from google.appengine.api import users
+from google.appengine.ext import ndb
+from models import GoogleUser
 
 personalitytest = {
     # index 0 = blueWords, 1 = orangeWords, 2 = greenWords, 3 = goldWords
@@ -17,21 +17,12 @@ personalitytest = {
 "question5": ["Vivacious <br> Affectionate <br> Sympathetic", "Exciting <br> Courageous <br> Skillful", "Determined <br> Principled <br> Rational", "Orderly <br> Habitual <br> Caring"]
 }
 
-from google.appengine.api import users
-from google.appengine.ext import ndb
-
 #jinja2.Environment is a constructor
-
-class GoogleUser(ndb.Model):
-    first_name = ndb.StringProperty(required = True)
-    last_initial = ndb.StringProperty(required = True)
-    email = ndb.StringProperty(required = True)
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
-
 
 class WelcomePage(webapp2.RequestHandler):
     def get(self):
@@ -43,7 +34,6 @@ class WelcomePage(webapp2.RequestHandler):
 
             existing_user = GoogleUser.query().filter(GoogleUser.email == email_address).get()
             user_status = ""
-            signedIn = False
             logout_url = ""
             goToURL = ""
             hasTakenTest = False
@@ -51,16 +41,16 @@ class WelcomePage(webapp2.RequestHandler):
             if existing_user:
                 if hasTakenTest == True:
                     user_status = "Results"
-                    goToURL = "/pages/newUser"
+                    goToURL = "/pages/results"
                 else:
                     user_status = "Take Test"
                     goToURL = "/pages/personalitytest"
-
-                signedIn = True
-                logout_url = users.create_logout_url('/')
             else:
                 user_status = "Add Info"
+                goToURL = "/pages/newUser"
 
+            logout_url = users.create_logout_url('/')
+            signedIn = True
 
             mydict = {
                 "status": user_status,
@@ -78,6 +68,55 @@ class WelcomePage(webapp2.RequestHandler):
                 "status": user_status,
                 "isSignedIn": False,
                 "goTo": login_url
+            }
+
+            self.response.write(welcome_page.render(mydict))
+
+    def post(self):
+        welcome_page = jinja_env.get_template('index.html')
+
+        user = users.get_current_user()
+
+        google_user = GoogleUser(
+            first_name=self.request.get('first_name'),
+            last_initial=self.request.get('last_initial'),
+            email = user.nickname(),
+            hasTakenTest = False,
+            color = ""
+            # interests = {}
+        )
+
+        google_user.put()
+
+        user = users.get_current_user()
+        if user:
+            email_address = user.nickname()
+
+            existing_user = GoogleUser.query().filter(GoogleUser.email == email_address).get()
+            user_status = ""
+            logout_url = ""
+            goToURL = ""
+            hasTakenTest = False
+
+            if existing_user:
+                if hasTakenTest == True:
+                    user_status = "Results"
+                    goToURL = "/pages/results"
+                else:
+                    user_status = "Take Test"
+                    goToURL = "/pages/personalitytest"
+            else:
+                user_status = "Add Info"
+                goToURL = "/pages/newUser"
+
+            logout_url = users.create_logout_url('/')
+            signedIn = True
+
+            mydict = {
+                "status": user_status,
+                "isSignedIn": signedIn,
+                "url": logout_url,
+                "goTo": goToURL
             }
 
             self.response.write(welcome_page.render(mydict))
@@ -104,7 +143,7 @@ class ResultsPage(webapp2.RequestHandler):
     def get(self):
         results_page = jinja_env.get_template('pages/results.html')
         self.response.write(results_page.render())
-        
+
     def post(self):
 
         answer1 = self.request.get("template")
@@ -149,16 +188,6 @@ class ResultsPage(webapp2.RequestHandler):
             "user_color" : color_store.color
             # "user_all_answers" : user_answers
         }
-
-        user = users.get_current_user()
-
-        google_user = GoogleUser(
-            first_name=self.request.get('first_name'),
-            last_initial=self.request.get('last_initial'),
-            email = user.nickname()
-        )
-
-        google_user.put()
 
         about_template = jinja_env.get_template('pages/about.html')
         self.response.write(about_template.render(data))
