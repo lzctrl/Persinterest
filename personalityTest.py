@@ -49,6 +49,4 @@ def choosing_interests(category):
 
 print(choosing_interests("gold_hobbies"))
 
-
-
 #print(looping_through("question1", "Versatile <br> Inventive <br> Competent"))

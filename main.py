@@ -237,7 +237,6 @@ class ResultsPage(webapp2.RequestHandler):
         #     # "user_all_answers" : user_answers
         # }
 
-
         user_color = ""
 
         if(list_colors.index(max_value) == 0):
