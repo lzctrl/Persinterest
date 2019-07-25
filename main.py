@@ -3,6 +3,7 @@ import jinja2 #connets to the html files
 import os #apple operating system
 # from google.appengine.api import urlfetch
 # import json
+<<<<<<< HEAD
 from personalityTest import looping_through
 from personalityTest import answersStore
 from personalityTest import userAnswers
@@ -17,7 +18,16 @@ personalitytest = {
 "question5": ["Vivacious <br> Affectionate <br> Sympathetic", "Exciting <br> Courageous <br> Skillful", "Determined <br> Principled <br> Rational", "Orderly <br> Habitual <br> Caring"]
 }
 
+=======
+from google.appengine.api import users
+from google.appengine.ext import ndb
+
 #jinja2.Environment is a constructor
+
+class TestUser(ndb.Model):
+    first_name = ndb.StringProperty(required = True)
+    last_initial = ndb.StringProperty(required = True)
+    email = ndb.StringProperty(required = True)
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -28,7 +38,40 @@ jinja_env = jinja2.Environment(
 class WelcomePage(webapp2.RequestHandler):
     def get(self):
         welcome_page = jinja_env.get_template('index.html')
-        self.response.write(welcome_page.render())
+
+        user = users.get_current_user()
+        if user:
+            email_address = user.nickname()
+
+            existing_user = TestUser.query().filter(TestUser.email == email_address).get()
+            user_status = ""
+            signedIn = False
+            logout_url = ""
+
+            if existing_user:
+                user_status = "Results"
+                signedIn = True
+                logout_url = users.create_logout_url('/')
+            else:
+                user_status = "Add Info"
+
+
+            mydict = {
+                "status": user_status,
+                "isSignedIn": signedIn,
+                "url": logout_url
+            }
+
+            self.response.write(welcome_page.render(mydict))
+        else:
+            user_status = "Sign In"
+
+            mydict = {
+                "status": user_status,
+                "isSignedIn": False
+            }
+
+            self.response.write(welcome_page.render(mydict))
 
 class PersonalityTestPage(webapp2.RequestHandler):
     def get(self):
@@ -53,7 +96,7 @@ class AboutPage(webapp2.RequestHandler):
         answer4 = self.request.get("template4")
         answer5 = self.request.get("template5")
         user_answers = userAnswers(a1 = answer1, a2 = answer2, a3 = answer3, a4 = answer4, a5 = answer5)
-        
+
         answers_index = [looping_through("question1", answer1),
         looping_through("question2", answer2),
         looping_through("question3", answer3),
@@ -104,8 +147,56 @@ class ResultsPage(webapp2.RequestHandler):
         results_page = jinja_env.get_template('pages/results.html')
         self.response.write(results_page.render())
 
+    def post(self):
+        user = users.get_current_user()
+
+        test_user = TestUser(
+            first_name=self.request.get('first_name'),
+            last_initial=self.request.get('last_initial'),
+            email = user.nickname()
+        )
+
+        test_user.put()
+        results_page = jinja_env.get_template('pages/results.html')
+        self.response.write(results_page.render())
+
+class NewUserPage(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user:
+            email_address = user.nickname()
+
+            existing_user = TestUser.query().filter(TestUser.email == email_address).get()
+
+            if existing_user:
+                #takes them to the results page/connection page with others
+                results_page = jinja_env.get_template('pages/results.html')
+                self.response.write(results_page.render())
+            else:
+                #insert a "not registered yet?" prompt with a redirection to this please register page
+                login_url = users.create_login_url('/pages/results')
+                mydict = {
+                    "url" : "",
+                    "isUser": True
+                }
+                new_user_page = jinja_env.get_template('pages/newUser.html')
+                self.response.write(new_user_page.render(mydict));
+                pass
+        else:
+            login_url = users.create_login_url('/pages/newUser')
+            self.redirect(login_url, True)
+            # mydict = {
+            #     "url" : login_url,
+            #     "isUser": False
+            # }
+            # new_user_page = jinja_env.get_template('pages/newUser.html')
+            # self.response.write(new_user_page.render(mydict));
+
+
 # the app configuration section
 app = webapp2.WSGIApplication(
-    [('/', WelcomePage), ('/pages/personalitytest', PersonalityTestPage), ('/pages/about', AboutPage), ('/pages/connections', ConnectionsPage), ('/pages/results', ResultsPage)],
+    [('/', WelcomePage), ('/pages/newUser', NewUserPage),
+    ('/pages/personalitytest', PersonalityTestPage), ('/pages/about', AboutPage),
+    ('/pages/connections', ConnectionsPage), ('/pages/results', ResultsPage)],
     debug = True
 )
