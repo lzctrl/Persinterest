@@ -16,10 +16,10 @@
   <label id="trigger" for="menu-toggle"></label>
   <label id="burger" for="menu-toggle"></label>
   <ul id="menu">
-    <li><a href="/pages/newUser">{{status}}</a></li>
+    <li><a href={{goTo}}>{{status}}</a></li>
     <li><a href="/pages/connections">Connections</a></li>
     <li><a href="/pages/about">About</a></li>
-    <li> <a href="#">Settings</a> </li>
+    <li> <a href="/pages/settings">Settings</a> </li>
     {% if isSignedIn == True %}
       <li> <a href="{{url}}">Log Out</a> </li>
     {% endif %}

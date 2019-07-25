@@ -31,9 +31,17 @@ class WelcomePage(webapp2.RequestHandler):
             user_status = ""
             signedIn = False
             logout_url = ""
+            goToURL = ""
+            hasTakenTest = False
 
             if existing_user:
-                user_status = "Results"
+                if hasTakenTest == True:
+                    user_status = "Results"
+                    goToURL = "/pages/newUser"
+                else:
+                    user_status = "Take Test"
+                    goToURL = "/pages/personalitytest"
+
                 signedIn = True
                 logout_url = users.create_logout_url('/')
             else:
@@ -43,7 +51,8 @@ class WelcomePage(webapp2.RequestHandler):
             mydict = {
                 "status": user_status,
                 "isSignedIn": signedIn,
-                "url": logout_url
+                "url": logout_url,
+                "goTo": goToURL
             }
 
             self.response.write(welcome_page.render(mydict))
@@ -153,10 +162,16 @@ class NewUserPage(webapp2.RequestHandler):
             # self.response.write(new_user_page.render(mydict));
 
 
+class SettingsPage(webapp2.RequestHandler):
+    def get(self):
+        settings_page = jinja_env.get_template('pages/settings.html')
+        self.response.write(settings_page.render())
+
 # the app configuration section
 app = webapp2.WSGIApplication(
     [('/', WelcomePage), ('/pages/newUser', NewUserPage),
     ('/pages/personalitytest', PersonalityTestPage), ('/pages/about', AboutPage),
-    ('/pages/connections', ConnectionsPage), ('/pages/results', ResultsPage)],
+    ('/pages/connections', ConnectionsPage), ('/pages/results', ResultsPage),
+    ('/pages/settings', SettingsPage)],
     debug = True
 )
