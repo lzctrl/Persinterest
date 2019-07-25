@@ -53,10 +53,12 @@ class WelcomePage(webapp2.RequestHandler):
             user_status = ""
             logout_url = ""
             goToURL = ""
-            hasTakenTest = False
+            currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
+            print(currentUser)
+            print(currentUser.hasTakenTest)
 
             if existing_user:
-                if hasTakenTest == True:
+                if currentUser.hasTakenTest == True:
                     user_status = "Results"
                     goToURL = "/pages/results"
                 else:
@@ -113,10 +115,11 @@ class WelcomePage(webapp2.RequestHandler):
             user_status = ""
             logout_url = ""
             goToURL = ""
-            hasTakenTest = False
-
+            currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
+            print(currentUser)
+            print(currentUser.hasTakenTest)
             if existing_user:
-                if hasTakenTest == True:
+                if currentUser.hasTakenTest == True:
                     user_status = "Results"
                     goToURL = "/pages/results"
                 else:
@@ -191,62 +194,74 @@ class ResultsPage(webapp2.RequestHandler):
             max_value = max(list_colors)
 
 
-
-        if(list_colors.index(max_value) == 0):
-            color_store = answersStore(color = "Blue")
-            color_interest = userInterests(hobbies = choosing_interests("blue_hobbies"),
-                                        living_and_travel =choosing_interests("blue_living_and_travel"),
-                                        education_and_careers=choosing_interests("blue_education_and_careers"),
-                                        music=choosing_interests("blue_music"),)
-        elif(list_colors.index(max_value) == 1):
-            color_store = answersStore(color = "Orange")
-            color_interest = userInterests(hobbies = choosing_interests("orange_hobbies"),
-                                        living_and_travel =choosing_interests("orange_living_and_travel"),
-                                        education_and_careers=choosing_interests("orange_education_and_careers"),
-                                        music=choosing_interests("orange_music"),)
-        elif(list_colors.index(max_value) == 2):
-            color_store = answersStore(color = "Green")
-            color_interest = userInterests(hobbies = choosing_interests("green_hobbies"),
-                                        living_and_travel =choosing_interests("green_living_and_travel"),
-                                        education_and_careers=choosing_interests("green_education_and_careers"),
-                                        music=choosing_interests("green_music"),)
-        elif(list_colors.index(max_value) == 3):
-            color_store = answersStore(color = "Gold")
-            color_interest = userInterests(hobbies = choosing_interests("gold_hobbies"),
-                                        living_and_travel =choosing_interests("gold_living_and_travel"),
-                                        education_and_careers=choosing_interests("gold_education_and_careers"),
-                                        music=choosing_interests("gold_music"),)
-
-        # user_array.put()
-        color_store.put()
-        color_interest.put()
-        data = {
-            "user_color" : color_store.color,
-            "user_hobbies" : color_interest.hobbies,
-            "user_living_and_travel": color_interest.living_and_travel,
-            "user_education_and_careers": color_interest.education_and_careers,
-            "user_music":color_interest.music
-            # "user_all_answers" : user_answers
-        }
-
         # if(list_colors.index(max_value) == 0):
         #     color_store = answersStore(color = "Blue")
+        #     color_interest = userInterests(hobbies = choosing_interests("blue_hobbies"),
+        #                                 living_and_travel =choosing_interests("blue_living_and_travel"),
+        #                                 education_and_careers=choosing_interests("blue_education_and_careers"),
+        #                                 music=choosing_interests("blue_music"),)
         # elif(list_colors.index(max_value) == 1):
         #     color_store = answersStore(color = "Orange")
+        #     color_interest = userInterests(hobbies = choosing_interests("orange_hobbies"),
+        #                                 living_and_travel =choosing_interests("orange_living_and_travel"),
+        #                                 education_and_careers=choosing_interests("orange_education_and_careers"),
+        #                                 music=choosing_interests("orange_music"),)
         # elif(list_colors.index(max_value) == 2):
         #     color_store = answersStore(color = "Green")
+        #     color_interest = userInterests(hobbies = choosing_interests("green_hobbies"),
+        #                                 living_and_travel =choosing_interests("green_living_and_travel"),
+        #                                 education_and_careers=choosing_interests("green_education_and_careers"),
+        #                                 music=choosing_interests("green_music"),)
         # elif(list_colors.index(max_value) == 3):
         #     color_store = answersStore(color = "Gold")
+        #     color_interest = userInterests(hobbies = choosing_interests("gold_hobbies"),
+        #                                 living_and_travel =choosing_interests("gold_living_and_travel"),
+        #                                 education_and_careers=choosing_interests("gold_education_and_careers"),
+        #                                 music=choosing_interests("gold_music"),)
         #
         # # user_array.put()
         # color_store.put()
+        # color_interest.put()
         # data = {
-        #     "user_color" : color_store.color
+        #     "user_color" : color_store.color,
+        #     "user_hobbies" : color_interest.hobbies,
+        #     "user_living_and_travel": color_interest.living_and_travel,
+        #     "user_education_and_careers": color_interest.education_and_careers,
+        #     "user_music":color_interest.music
         #     # "user_all_answers" : user_answers
         # }
 
-        about_template = jinja_env.get_template('pages/about.html')
-        self.response.write(about_template.render(data))
+
+        user_color = ""
+
+        if(list_colors.index(max_value) == 0):
+            user_color = "Blue"
+        elif(list_colors.index(max_value) == 1):
+            user_color = "Orange"
+        elif(list_colors.index(max_value) == 2):
+            user_color = "Green"
+        elif(list_colors.index(max_value) == 3):
+            user_color = "Gold"
+
+        user = users.get_current_user()
+        email_address = user.nickname()
+
+        # user_array.put()
+        currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
+        print(currentUser)
+        print(currentUser.hasTakenTest)
+        currentUser.hasTakenTest = True
+        currentUser.color = user_color
+
+        currentUser.put()
+        data = {
+            "user_color" : user_color
+            # "user_all_answers" : user_answers
+        }
+
+        results_template = jinja_env.get_template('pages/results.html')
+        self.response.write(results_template.render(data))
+
 
 class NewUserPage(webapp2.RequestHandler):
     def get(self):
