@@ -265,3 +265,30 @@ Results page
   margin: 5px;
   width: 75%;
 }
+
+/* ===============================================================================
+Personality Test page
+=============================================================================== */
+.testContent{
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.adjsSpace{
+  display: flex;
+  justify-content: space-around;
+}
+
+/* input[type=radio]{
+  postion: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+input[type=radio] + .adjectives{
+  cursor: pointer;
+}
+input[type=radio]{
+
+} */

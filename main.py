@@ -237,15 +237,32 @@ class ResultsPage(webapp2.RequestHandler):
 
         if(list_colors.index(max_value) == 0):
             user_color = "Blue"
+            color_interest = userInterests(hobbies = choosing_interests("blue_hobbies"),
+                                             living_and_travel =choosing_interests("blue_living_and_travel"),
+                                             education_and_careers=choosing_interests("blue_education_and_careers"),
+                                             music=choosing_interests("blue_music"),)
         elif(list_colors.index(max_value) == 1):
             user_color = "Orange"
+            color_interest = userInterests(hobbies = choosing_interests("orange_hobbies"),
+                                             living_and_travel =choosing_interests("orange_living_and_travel"),
+                                             education_and_careers=choosing_interests("orange_education_and_careers"),
+                                             music=choosing_interests("orange_music"),)
         elif(list_colors.index(max_value) == 2):
             user_color = "Green"
+            color_interest = userInterests(hobbies = choosing_interests("green_hobbies"),
+                                             living_and_travel =choosing_interests("green_living_and_travel"),
+                                             education_and_careers=choosing_interests("green_education_and_careers"),
+                                             music=choosing_interests("green_music"),)
         elif(list_colors.index(max_value) == 3):
             user_color = "Gold"
+            color_interest = userInterests(hobbies = choosing_interests("gold_hobbies"),
+                                             living_and_travel =choosing_interests("gold_living_and_travel"),
+                                             education_and_careers=choosing_interests("gold_education_and_careers"),
+                                             music=choosing_interests("gold_music"),)
 
         user = users.get_current_user()
         email_address = user.nickname()
+        color_interest.put()
 
         # user_array.put()
         currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
@@ -254,7 +271,11 @@ class ResultsPage(webapp2.RequestHandler):
 
         currentUser.put()
         data = {
-            "user_color" : user_color
+            "user_color" : user_color,
+            "user_hobbies" : color_interest.hobbies,
+            "user_living_and_travel": color_interest.living_and_travel,
+            "user_education_and_careers": color_interest.education_and_careers,
+            "user_music":color_interest.music
             # "user_all_answers" : user_answers
         }
 

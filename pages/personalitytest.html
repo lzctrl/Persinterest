@@ -13,51 +13,68 @@
 </head>
 <body>
   <form action="/pages/results" method="post">
-  <div class="">
-    {%for choices1 in question1%}
-        <input type="radio" name = "template" value = "{{choices1}}" required/>
-        {{choices1|safe}}
+    <div class="testContent">
+      <div class="row">
+        <div class="col adjsSpace" style="width: 100%">
+          {%for choices1 in question1%}
+          <div class="adjectives">
+            <input type="radio" name = "template" value = "{{choices1}}" required/>
+            {{choices1|safe}}
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="row">
+        <div class="col adjsSpace" style="width:100%;">
+          {%for choices2 in question2%}
+          <div class="adjectives">
+            <input type="radio" name = "template2" value = "{{choices2}}" required/>
+            {{choices2|safe}}
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="row">
+        <div class="col adjsSpace" style="width:100%;">
+          {%for choices3 in question3%}
+          <div class="adjectives">
+            <input type="radio" name = "template3" value = "{{choices3}}" required/>
+            {{choices3|safe}}
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="row">
+        <div class="col adjsSpace" style="width:100%;">
+          {%for choices4 in question4%}
+          <div class="adjectives">
+            <input type="radio" name = "template4" value = "{{choices4}}" required/>
+            {{choices4|safe}}
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="row">
+        <div class="col adjsSpace" style="width:100%;">
+          {%for choices5 in question5%}
+          <div class="adjectives">
+            <input type="radio" name = "template5" value = "{{choices5}}" required/>
+            {{choices5|safe}}
+          </div>
+          {%endfor%}
+        </div>
+      </div>
       <br>
-    {%endfor%}
-  </div>
-    <br/>
-    <br/>
-  <div class="">
-    {%for choices2 in question2%}
-        <input type="radio" name = "template2" value = "{{choices2}}" required/>
-        {{choices2|safe}}
-        <br>
-    {%endfor%}
-  </div>
-    <br/>
-    <br/>
-  <div class="">
-    {%for choices3 in question3%}
-        <input type="radio" name = "template3" value = "{{choices3}}" required/>
-        {{choices3|safe}}
-        <br>
-    {%endfor%}
-  </div>
-    <br/>
-    <br/>
-  <div class="">
-    {%for choices4 in question4%}
-        <input type="radio" name = "template4" value = "{{choices4}}" required/>
-        {{choices4|safe}}
-        <br>
-    {%endfor%}
-  </div>
-    <br/>
-    <br/>
-  <div class="">
-    {%for choices5 in question5%}
-        <input type="radio" name = "template5" value = "{{choices5}}" required/>
-        {{choices5|safe}}
-        <br>
-    {%endfor%}
-  </div>
-  <br>
-  <input type="submit" value="Submit">
+    </div>
+    <input type="submit" value="Submit">
 
   </form>
 
