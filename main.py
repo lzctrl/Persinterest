@@ -54,8 +54,6 @@ class WelcomePage(webapp2.RequestHandler):
             logout_url = ""
             goToURL = ""
             currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
-            print(currentUser)
-            print(currentUser.hasTakenTest)
 
             if existing_user:
                 if currentUser.hasTakenTest == True:
@@ -116,8 +114,6 @@ class WelcomePage(webapp2.RequestHandler):
             logout_url = ""
             goToURL = ""
             currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
-            print(currentUser)
-            print(currentUser.hasTakenTest)
             if existing_user:
                 if currentUser.hasTakenTest == True:
                     user_status = "Results"
