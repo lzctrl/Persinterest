@@ -73,9 +73,9 @@ Index page
 }
 
 .main_button:hover {
-  color: white;
-  background-color: #0c5575;
-  border: 1px solid #0c5575;
+  color: #39A9DB;
+  background-color: #fff;
+  border: 1px solid #39A9DB;
 }
 
 .centered {
