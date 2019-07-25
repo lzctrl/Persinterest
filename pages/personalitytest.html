@@ -12,10 +12,10 @@
   <title>Test</title>
 </head>
 <body>
-  <form action="/pages/about" method="post">
+  <form action="/pages/results" method="post">
   <div class="">
     {%for choices1 in question1%}
-        <input type="radio" name = "template" value = "{{choices1}}"/>
+        <input type="radio" name = "template" value = "{{choices1}}" required/>
         {{choices1|safe}}
       <br>
     {%endfor%}
@@ -24,7 +24,7 @@
     <br/>
   <div class="">
     {%for choices2 in question2%}
-        <input type="radio" name = "template2" value = "{{choices2}}"/>
+        <input type="radio" name = "template2" value = "{{choices2}}" required/>
         {{choices2|safe}}
         <br>
     {%endfor%}
@@ -33,7 +33,7 @@
     <br/>
   <div class="">
     {%for choices3 in question3%}
-        <input type="radio" name = "template3" value = "{{choices3}}"/>
+        <input type="radio" name = "template3" value = "{{choices3}}" required/>
         {{choices3|safe}}
         <br>
     {%endfor%}
@@ -42,7 +42,7 @@
     <br/>
   <div class="">
     {%for choices4 in question4%}
-        <input type="radio" name = "template4" value = "{{choices4}}"/>
+        <input type="radio" name = "template4" value = "{{choices4}}" required/>
         {{choices4|safe}}
         <br>
     {%endfor%}
@@ -51,7 +51,7 @@
     <br/>
   <div class="">
     {%for choices5 in question5%}
-        <input type="radio" name = "template5" value = "{{choices5}}"/>
+        <input type="radio" name = "template5" value = "{{choices5}}" required/>
         {{choices5|safe}}
         <br>
     {%endfor%}

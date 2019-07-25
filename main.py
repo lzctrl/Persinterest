@@ -3,7 +3,6 @@ import jinja2 #connets to the html files
 import os #apple operating system
 # from google.appengine.api import urlfetch
 # import json
-<<<<<<< HEAD
 from personalityTest import looping_through
 from personalityTest import answersStore
 from personalityTest import userAnswers
@@ -18,13 +17,12 @@ personalitytest = {
 "question5": ["Vivacious <br> Affectionate <br> Sympathetic", "Exciting <br> Courageous <br> Skillful", "Determined <br> Principled <br> Rational", "Orderly <br> Habitual <br> Caring"]
 }
 
-=======
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
 #jinja2.Environment is a constructor
 
-class TestUser(ndb.Model):
+class GoogleUser(ndb.Model):
     first_name = ndb.StringProperty(required = True)
     last_initial = ndb.StringProperty(required = True)
     email = ndb.StringProperty(required = True)
@@ -43,7 +41,7 @@ class WelcomePage(webapp2.RequestHandler):
         if user:
             email_address = user.nickname()
 
-            existing_user = TestUser.query().filter(TestUser.email == email_address).get()
+            existing_user = GoogleUser.query().filter(GoogleUser.email == email_address).get()
             user_status = ""
             signedIn = False
             logout_url = ""
@@ -74,10 +72,12 @@ class WelcomePage(webapp2.RequestHandler):
             self.response.write(welcome_page.render(mydict))
         else:
             user_status = "Sign In"
+            login_url = users.create_login_url('/pages/newUser')
 
             mydict = {
                 "status": user_status,
-                "isSignedIn": False
+                "isSignedIn": False,
+                "goTo": login_url
             }
 
             self.response.write(welcome_page.render(mydict))
@@ -90,13 +90,21 @@ class PersonalityTestPage(webapp2.RequestHandler):
         self.response.write(personality_test_page.render(personalitytest))
 
 
-
-
-
 class AboutPage(webapp2.RequestHandler):
     def get(self):
         about_page = jinja_env.get_template('pages/about.html')
         self.response.write(about_page.render())
+
+class ConnectionsPage(webapp2.RequestHandler):
+    def get(self):
+        connections_page = jinja_env.get_template('pages/connections.html')
+        self.response.write(connections_page.render())
+
+class ResultsPage(webapp2.RequestHandler):
+    def get(self):
+        results_page = jinja_env.get_template('pages/results.html')
+        self.response.write(results_page.render())
+        
     def post(self):
 
         answer1 = self.request.get("template")
@@ -104,7 +112,6 @@ class AboutPage(webapp2.RequestHandler):
         answer3 = self.request.get("template3")
         answer4 = self.request.get("template4")
         answer5 = self.request.get("template5")
-        user_answers = userAnswers(a1 = answer1, a2 = answer2, a3 = answer3, a4 = answer4, a5 = answer5)
 
         answers_index = [looping_through("question1", answer1),
         looping_through("question2", answer2),
@@ -136,38 +143,25 @@ class AboutPage(webapp2.RequestHandler):
         elif(list_colors.index(max_value) == 3):
             color_store = answersStore(color = "Gold")
 
-        user_array.put()
+        # user_array.put()
         color_store.put()
         data = {
-            "user_color" : color_store.color,
-            "user_all_answers" : user_answers
+            "user_color" : color_store.color
+            # "user_all_answers" : user_answers
         }
-        about_template = jinja_env.get_template('pages/about.html')
-        self.response.write(about_template.render(data))
 
-
-class ConnectionsPage(webapp2.RequestHandler):
-    def get(self):
-        connections_page = jinja_env.get_template('pages/connections.html')
-        self.response.write(connections_page.render())
-
-class ResultsPage(webapp2.RequestHandler):
-    def get(self):
-        results_page = jinja_env.get_template('pages/results.html')
-        self.response.write(results_page.render())
-
-    def post(self):
         user = users.get_current_user()
 
-        test_user = TestUser(
+        google_user = GoogleUser(
             first_name=self.request.get('first_name'),
             last_initial=self.request.get('last_initial'),
             email = user.nickname()
         )
 
-        test_user.put()
-        results_page = jinja_env.get_template('pages/results.html')
-        self.response.write(results_page.render())
+        google_user.put()
+
+        about_template = jinja_env.get_template('pages/about.html')
+        self.response.write(about_template.render(data))
 
 class NewUserPage(webapp2.RequestHandler):
     def get(self):
@@ -175,7 +169,7 @@ class NewUserPage(webapp2.RequestHandler):
         if user:
             email_address = user.nickname()
 
-            existing_user = TestUser.query().filter(TestUser.email == email_address).get()
+            existing_user = GoogleUser.query().filter(GoogleUser.email == email_address).get()
 
             if existing_user:
                 #takes them to the results page/connection page with others
@@ -185,7 +179,7 @@ class NewUserPage(webapp2.RequestHandler):
                 #insert a "not registered yet?" prompt with a redirection to this please register page
                 login_url = users.create_login_url('/pages/results')
                 mydict = {
-                    "url" : "",
+                    "url" : login_url,
                     "isUser": True
                 }
                 new_user_page = jinja_env.get_template('pages/newUser.html')
