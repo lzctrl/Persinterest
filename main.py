@@ -144,8 +144,14 @@ class ConnectionsPage(webapp2.RequestHandler):
 
 class ResultsPage(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
+        email_address = user.nickname()
+        currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
+        data = {
+            "user_color" : currentUser.color
+        }
         results_page = jinja_env.get_template('pages/results.html')
-        self.response.write(results_page.render())
+        self.response.write(results_page.render(data))
 
     def post(self):
 
@@ -192,8 +198,6 @@ class ResultsPage(webapp2.RequestHandler):
 
         # user_array.put()
         currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
-        print(currentUser)
-        print(currentUser.hasTakenTest)
         currentUser.hasTakenTest = True
         currentUser.color = user_color
 

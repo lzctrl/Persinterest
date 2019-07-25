@@ -60,19 +60,22 @@ Index page
 
 /* The main starter button  */
 .main_button {
-  color: #39A9DB;
+  background-color: #39A9DB;
+  color: #fff;
   font-family: sans-serif;
   font-weight: 500;
   font-size: 22px;
   text-decoration: none;
   border: 1px solid #39A9DB;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 10px 30px;
+  transition: 0.5s;
 }
 
 .main_button:hover {
   color: white;
-  background-color: #39A9DB;
+  background-color: #0c5575;
+  border: 1px solid #0c5575;
 }
 
 .centered {
@@ -219,6 +222,15 @@ Connections page
 /* ===============================================================================
 Results page
 =============================================================================== */
+
+.userColorRow {
+
+}
+
+.userColorRow h4 {
+  color: white;
+  padding: 5px 20px;
+}
 
 .resultsContent {
   margin-left: 200px;
