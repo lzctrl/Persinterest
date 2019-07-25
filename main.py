@@ -144,12 +144,13 @@ class NewUserPage(webapp2.RequestHandler):
                 pass
         else:
             login_url = users.create_login_url('/pages/newUser')
-            mydict = {
-                "url" : login_url,
-                "isUser": False
-            }
-            new_user_page = jinja_env.get_template('pages/newUser.html')
-            self.response.write(new_user_page.render(mydict));
+            self.redirect(login_url, True)
+            # mydict = {
+            #     "url" : login_url,
+            #     "isUser": False
+            # }
+            # new_user_page = jinja_env.get_template('pages/newUser.html')
+            # self.response.write(new_user_page.render(mydict));
 
 
 # the app configuration section

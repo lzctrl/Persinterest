@@ -241,6 +241,7 @@ Results page
 .interestWord:hover{
   background-color: blue;
   color: white;
+  cursor: pointer;
 }
 
 .resultsImages {
