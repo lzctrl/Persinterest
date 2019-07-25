@@ -109,12 +109,13 @@ class ResultsPage(webapp2.RequestHandler):
 
     def post(self):
         user = users.get_current_user()
-        print("WE ARE HERE 4")
+
         test_user = TestUser(
             first_name=self.request.get('first_name'),
             last_initial=self.request.get('last_initial'),
             email = user.nickname()
         )
+
         test_user.put()
         results_page = jinja_env.get_template('pages/results.html')
         self.response.write(results_page.render())
@@ -142,7 +143,7 @@ class NewUserPage(webapp2.RequestHandler):
                 self.response.write(new_user_page.render(mydict));
                 pass
         else:
-            login_url = users.create_login_url('/pages/results')
+            login_url = users.create_login_url('/pages/newUser')
             mydict = {
                 "url" : login_url,
                 "isUser": False

@@ -2,6 +2,8 @@
 html, body {
     overflow-x: hidden;
     font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
     /* height: 100%; */
 }
 
@@ -33,8 +35,6 @@ Index page
   background-repeat: no-repeat;
   background-size: cover;
   /* background: #fff; */
-  padding: 0;
-  margin: 0;
   font-family: 'Varela Round', sans-serif;
 }
 

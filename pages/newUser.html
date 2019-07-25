@@ -12,8 +12,8 @@
     {% if isUser == True %}
       <p>You don't exist!!!</p>
       <form method='post' action='/pages/results'>
-        First Name: <input type='text' name='{{first_name}}'>
-        Last Initial: <input type='text' maxlength='1' name='{{last_initial}}'>
+        First Name: <input type='text' name='first_name'>
+        Last Initial: <input type='text' maxlength='1' name='last_initial'>
         <input type='submit'>
       </form>
     {% endif %}
