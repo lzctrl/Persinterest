@@ -15,6 +15,11 @@
   <form action="/pages/results" method="post">
     <div class="testContent">
       <div class="row">
+        <div class="col" style="height: 50px; width: 100%;">
+          <h2>Personality Test</h2>
+        </div>
+      </div>
+      <div class="row">
         <div class="col adjsSpace" style="width: 100%">
           {%for choices1 in question1%}
           <div class="adjectives">
@@ -85,11 +90,17 @@
       </div>
       <br>
     </div>
-    <input type="submit" value="Submit">
+    <br>
+    <br>
+    <br>
+    <div class="submitButton">
+        <input type="submit" value="Submit">
+    </div>
+
 
   </form>
 
   <br/>
-  <a href="/pages/results">Results</a>
+  <!-- <a href="/pages/results">Results</a> -->
 </body>
 </html>
