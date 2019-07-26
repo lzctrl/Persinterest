@@ -23,8 +23,8 @@
   </ul>
   <div class="resultsContent">
     <div class="row">
-      <div class="col" style="height: 50px; width: 100%;">
-        <p style="float:left; margin-left: 15px;">Your Results</p>
+      <div class="col resultsHeader" style="height: 50px; width: 100%;">
+        <p >Your Results</p>
       </div>
     </div>
     <br>
@@ -35,22 +35,22 @@
         </div>
         <div class="interestsResults">
           <div class="interestWord">
-            {{user_hobbies}}
+            <a href="#">{{user_hobbies}}</a>
           </div>
           <div class="interestWord">
-            {{user_living_and_travel}}
+            <a href="#">{{user_living_and_travel}}</a>
           </div>
           <div class="interestWord">
-            {{user_education_and_careers}}
+            <a href="#">{{user_education_and_careers}}</a>
           </div>
           <div class="interestWord">
-            {{user_music}}
+            <a href="#">{{user_music}}</a>
           </div>
         </div>
       </div>
       <div class="col" style="width: 33.3%;">
-        <div class="row" style="background-color: red; min-height: 50px;">
-          <a href="/pages/connections">Connect</a>
+        <div class="row userConnectRow" style="min-height: 50px;">
+          <h4><a href="/pages/connections">Connect</a></h4> 
         </div>
         <div class="row" style="background-color: blue;">
           <div class="resultsImages">

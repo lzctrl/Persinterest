@@ -7,4 +7,8 @@ class GoogleUser(ndb.Model):
     email = ndb.StringProperty(required = True)
     hasTakenTest = ndb.BooleanProperty(required = True)
     color = ndb.StringProperty(required = False)
+    education_and_careers = ndb.StringProperty(required = False)
+    hobbies = ndb.StringProperty(required = False)
+    living_and_travel = ndb.StringProperty(required = False)
+    music = ndb.StringProperty(required = False)
     # interests = ndb.JsonProperty(requred = False)

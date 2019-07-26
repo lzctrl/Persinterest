@@ -33,6 +33,7 @@ personalityresults = {
     "gold_living_and_travel": ["Living in mid-sized cities", "Boston", "Ann Arbor", "New England", "Toronto", "Rome", "Portland", "Syracuse"]
 
 }
+
 #jinja2.Environment is a constructor
 
 jinja_env = jinja2.Environment(
@@ -58,12 +59,18 @@ class WelcomePage(webapp2.RequestHandler):
                 if currentUser.hasTakenTest == True:
                     user_status = "Results"
                     goToURL = "/pages/results"
+                    button_text = "Results"
+                    button_url = "/pages/results"
                 else:
-                    user_status = "Take Test"
+                    user_status = "Get Started"
                     goToURL = "/pages/personalitytest"
+                    button_text = "Get Started"
+                    button_url = "/pages/personalitytest"
             else:
                 user_status = "Add Info"
                 goToURL = "/pages/newUser"
+                button_text = "Get Started"
+                button_url = "/pages/personalitytest"
 
             logout_url = users.create_logout_url('/')
             signedIn = True
@@ -72,18 +79,23 @@ class WelcomePage(webapp2.RequestHandler):
                 "status": user_status,
                 "isSignedIn": signedIn,
                 "url": logout_url,
-                "goTo": goToURL
+                "goTo": goToURL,
+                "main_button_text": button_text,
+                "main_button_url": button_url
             }
 
             self.response.write(welcome_page.render(mydict))
         else:
-            user_status = "Sign In"
+            user_status = "Sign Up"
             login_url = users.create_login_url('/pages/newUser')
+
 
             mydict = {
                 "status": user_status,
                 "isSignedIn": False,
-                "goTo": login_url
+                "goTo": login_url,
+                "main_button_text": user_status,
+                "main_button_url": login_url
             }
 
             self.response.write(welcome_page.render(mydict))
@@ -117,12 +129,18 @@ class WelcomePage(webapp2.RequestHandler):
                 if currentUser.hasTakenTest == True:
                     user_status = "Results"
                     goToURL = "/pages/results"
+                    button_text = "Results"
+                    button_url = "/pages/results"
                 else:
                     user_status = "Take Test"
                     goToURL = "/pages/personalitytest"
+                    button_text = "Get Started"
+                    button_url = "/pages/personalitytest"
             else:
                 user_status = "Add Info"
                 goToURL = "/pages/newUser"
+                button_text = "Get Started"
+                button_url = "/pages/personalitytest"
 
             logout_url = users.create_logout_url('/')
             signedIn = True
@@ -131,7 +149,10 @@ class WelcomePage(webapp2.RequestHandler):
                 "status": user_status,
                 "isSignedIn": signedIn,
                 "url": logout_url,
-                "goTo": goToURL
+                "goTo": goToURL,
+                "main_button_text": button_text,
+                "main_button_url": button_url
+
             }
 
             self.response.write(welcome_page.render(mydict))
@@ -158,7 +179,11 @@ class ResultsPage(webapp2.RequestHandler):
         email_address = user.nickname()
         currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
         data = {
-            "user_color" : currentUser.color
+            "user_color" : currentUser.color,
+            "user_hobbies": currentUser.hobbies,
+            "user_living_and_travel": currentUser.living_and_travel,
+            "user_education_and_careers": currentUser.education_and_careers,
+            "user_music": currentUser.music
         }
         results_page = jinja_env.get_template('pages/results.html')
         self.response.write(results_page.render(data))
@@ -265,6 +290,10 @@ class ResultsPage(webapp2.RequestHandler):
         currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
         currentUser.hasTakenTest = True
         currentUser.color = user_color
+        currentUser.education_and_careers = color_interest.education_and_careers
+        currentUser.hobbies = color_interest.hobbies
+        currentUser.living_and_travel = color_interest.living_and_travel
+        currentUser.music = color_interest.music
 
         currentUser.put()
         data = {

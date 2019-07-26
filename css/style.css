@@ -19,7 +19,7 @@ All
 }
 
 .col {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 50%;
   min-height: 50px;
   /* height: 100px; */
@@ -227,9 +227,15 @@ Results page
 
 }
 
-.userColorRow h4 {
+.userColorRow h4, .userConnectRow h4{
   color: white;
   padding: 5px 20px;
+}
+
+.userConnectRow h4 a {
+  color: red;
+  text-decoration: none;
+  /* padding: 5px 20px; */
 }
 
 .resultsContent {
@@ -264,6 +270,16 @@ Results page
 .resultsImages img {
   margin: 5px;
   width: 75%;
+}
+
+.resultsHeader {
+  padding: 10px;
+}
+
+.resultsHeader p {
+  font-size: 26px;
+  float:left;
+  margin-left: 15px;
 }
 
 /* ===============================================================================
