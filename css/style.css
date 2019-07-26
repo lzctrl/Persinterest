@@ -223,13 +223,19 @@ Connections page
 Results page
 =============================================================================== */
 
-.userColorRow {
-
+#resultsPage {
+  background: url(../images/background_image_results.png);
+  /* width: 100%; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background: #fff; */
+  font-family: 'Varela Round', sans-serif;
 }
 
 .userColorRow h4, .userConnectRow h4{
-  color: white;
+  color: #222;
   padding: 5px 20px;
+  font-family: sans-serif;
 }
 
 .userConnectRow h4 a {
@@ -308,11 +314,22 @@ Results page
   font-size: 26px;
   float:left;
   margin-left: 15px;
+  font-family: sans-serif;
 }
 
 /* ===============================================================================
 Personality Test page
 =============================================================================== */
+
+#testPage {
+  background: url(../images/background_image_test.png);
+  /* width: 100%; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background: #fff; */
+  font-family: 'Varela Round', sans-serif;
+}
+
 .testContent{
   margin-left: 200px;
   margin-right: 200px;
