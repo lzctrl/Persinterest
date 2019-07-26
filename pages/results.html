@@ -11,7 +11,7 @@
   <!-- Title -->
   <title>Results</title>
 </head>
-<body>
+<body id="resultsPage">
   <input type="checkbox" id="menu-toggle"/>
   <label id="trigger" for="menu-toggle"></label>
   <label id="burger" for="menu-toggle"></label>
@@ -30,8 +30,8 @@
     <br>
     <div class="row">
       <div class="col" style="width: 66.7%;">
-        <div class="row userColorRow" style="background-color: {{user_color}};min-height: 50px;">
-          <h4>{{user_color}}</h4>
+        <div class="row userColorRow" style="min-height: 50px;">
+          <h4>Color: <span style="color: {{user_color}}">{{user_color}}</span></h4>
         </div>
         <div class="interestsResults">
           <div class="interestWord hobbies">
@@ -57,13 +57,12 @@
         </div>
       </div>
       <div class="col" style="width: 33.3%;">
-        <div class="row userConnectRow" style="min-height: 50px;">
-          <h4><a href="/pages/connections">Connect</a></h4>
+        <div class="row userConnectRow" style="text-align:center; min-height: 50px;">
+          <h4 style="width: 100%;"><a href="/pages/connections">Connect</a></h4>
         </div>
         <div class="row">
           <div class="resultsImages">
             <img src="https://images.unsplash.com/photo-1563927646365-02e40b3a5361?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
-            <img src="https://images.unsplash.com/photo-1562101660-01a86ab85b86?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
             <img src="https://images.unsplash.com/photo-1563917774416-9f516a3b2fad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" alt="">
           </div>
         </div>
