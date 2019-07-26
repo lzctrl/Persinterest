@@ -36,7 +36,7 @@ personalityresults = {
     "green_education_and_careers": ["Attorney", "Researcher", "Engineer", "Veterinarian", "Physician", "FBI Agent"],
     "green_music" :["Classical Genre", "Podcasts"],
     "green_living_and_travel": ["Living in the city", "Silicon Valley", "New York", "Austin", "Chicago", "Seattle", "Zurich", "London", "Beijing" ],
-    "gold_hobbies" : ["Soccer", "Volunteering", "Personal Projects", "Organizing Events"],
+    "gold_hobbies" : ["Soccer", "Volunteering", "Personal Projects", "Organizing Events", "Minimalism"],
     "gold_education_and_careers": ["Accountant", "Financial Planner", "Manager", "Statistical Clerk", "Secretary", "Bank Officer", "Auditor"],
     "gold_music" :["Classical Genre", "Pop Genre"],
     "gold_living_and_travel": ["Living in mid-sized cities", "Boston", "Ann Arbor", "New England", "Toronto", "Rome", "Portland", "Syracuse"]

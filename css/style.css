@@ -248,11 +248,39 @@ Results page
   margin: 5px;
   border: 1px solid blue;
   border-radius: 5px;
+  text-align: center;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  /* border: 5px solid #FFF;
+  border-radius: 180px;
+  box-shadow: 0 0 20px #888;
+  height: 150px;
+  width: 150px; */
+}
+.hobbies{
+  background: url(../images/hobbies.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.career{
+  background: url(../images/career.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.travel{
+  background: url(../images/travel.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.music{
+  background: url(../images/music.jpg);
+  background-size: cover;
+  background-repeat: no-repeat; 
 }
 
 .interestWord:hover{
-  background-color: blue;
+  background: url(../images/blue.png);
   color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   cursor: pointer;
 }
 
