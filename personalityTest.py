@@ -30,7 +30,7 @@ personalityresults = {
     "blue_living_and_travel": ["Living in the suburbs", "Yosemite National Park", "Yellowstone National Park", "New Zealand", "Grand Canyon", "Iceland", "Canada"],
     "orange_hobbies" : ["Football", "Basketball", "Hockey", "Skydiving", "Rollercoasters"],
     "orange_education_and_careers": ["Entrepreneur", "Marketing", "Advertising", "Actor", "Painter", "Comedian", "Dance Teacher"],
-    "orange_music" :["Rap Genre", "Rock Genre"],
+    "orange_music" :["Rap Genre", "Rock and Roll"],
     "orange_living_and_travel": ["Living in the city", "Hong Kong", "Dubai", "Tokyo", "Seoul", "New York", "Miami"],
     "green_hobbies" : ["Chess", "Golf", "Photography", "Reading", "Rocket Science"],
     "green_education_and_careers": ["Attorney", "Researcher", "Engineer", "Veterinarian", "Physician", "FBI Agent"],

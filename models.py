@@ -12,3 +12,25 @@ class GoogleUser(ndb.Model):
     living_and_travel = ndb.StringProperty(required = False)
     music = ndb.StringProperty(required = False)
     # interests = ndb.JsonProperty(requred = False)
+
+
+def getImage(keyword):
+    words = []
+    for word in keyword.split(' '):
+        words.append(word)
+
+    if len(words) == 1:
+        return "https://source.unsplash.com/random/?" + keyword
+
+    connect = ""
+    for i in range(0, len(words)):
+        print(i)
+        print(len(words) - 1)
+        if i == len(words) - 1:
+            connect += words[i]
+        else:
+            connect += words[i] + "%20"
+
+    print(connect)
+
+    return "https://source.unsplash.com/random/?" + connect

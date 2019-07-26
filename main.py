@@ -5,7 +5,7 @@ import random
 from personalityTest import looping_through, answersStore, userInterests, choosing_interests
 from google.appengine.api import users
 from google.appengine.ext import ndb
-from models import GoogleUser
+from models import GoogleUser, getImage
 
 personalitytest = {
     "question1": ["Authentic <br> Harmonious <br> Compassionate", "Active <br> Opportunistic <br> Spontaneous", "Versatile <br> Inventive <br> Competent", "Parental <br> Traditional <br> Responsible"],
@@ -21,7 +21,7 @@ personalityresults = {
     "blue_living_and_travel": ["Living in the suburbs", "Yosemite National Park", "Yellowstone National Park", "New Zealand", "Grand Canyon", "Iceland", "Canada"],
     "orange_hobbies" : ["Football", "Basketball", "Hockey", "Skydiving", "Rollercoasters"],
     "orange_education_and_careers": ["Entrepreneur", "Marketing", "Advertising", "Actor", "Painter", "Comedian", "Dance Teacher"],
-    "orange_music" :["Rap Genre", "Rock Genre"],
+    "orange_music" :["Rap Genre", "Rock and Roll"],
     "orange_living_and_travel": ["Living in the city", "Hong Kong", "Dubai", "Tokyo", "Seoul", "New York", "Miami"],
     "green_hobbies" : ["Chess", "Golf", "Photography", "Reading", "Rocket Science"],
     "green_education_and_careers": ["Attorney", "Researcher", "Engineer", "Veterinarian", "Physician", "FBI Agent"],
@@ -178,12 +178,19 @@ class ResultsPage(webapp2.RequestHandler):
         user = users.get_current_user()
         email_address = user.nickname()
         currentUser = GoogleUser.query().filter(GoogleUser.email == email_address).get()
+        userColorImg = ""
         data = {
             "user_color" : currentUser.color,
             "user_hobbies": currentUser.hobbies,
             "user_living_and_travel": currentUser.living_and_travel,
             "user_education_and_careers": currentUser.education_and_careers,
-            "user_music": currentUser.music
+            "user_music": currentUser.music,
+            "colorImage": getImage(currentUser.color),
+            "hobbies_image": getImage(currentUser.hobbies),
+            "living_and_travel_image": getImage(currentUser.living_and_travel),
+            "education_and_careers_image": getImage(currentUser.education_and_careers),
+            "music_image": getImage(currentUser.music),
+            "connect_image": getImage("iphone")
         }
         results_page = jinja_env.get_template('pages/results.html')
         self.response.write(results_page.render(data))
@@ -216,44 +223,6 @@ class ResultsPage(webapp2.RequestHandler):
             max_value = 2
         else:
             max_value = max(list_colors)
-
-
-        # if(list_colors.index(max_value) == 0):
-        #     color_store = answersStore(color = "Blue")
-        #     color_interest = userInterests(hobbies = choosing_interests("blue_hobbies"),
-        #                                 living_and_travel =choosing_interests("blue_living_and_travel"),
-        #                                 education_and_careers=choosing_interests("blue_education_and_careers"),
-        #                                 music=choosing_interests("blue_music"),)
-        # elif(list_colors.index(max_value) == 1):
-        #     color_store = answersStore(color = "Orange")
-        #     color_interest = userInterests(hobbies = choosing_interests("orange_hobbies"),
-        #                                 living_and_travel =choosing_interests("orange_living_and_travel"),
-        #                                 education_and_careers=choosing_interests("orange_education_and_careers"),
-        #                                 music=choosing_interests("orange_music"),)
-        # elif(list_colors.index(max_value) == 2):
-        #     color_store = answersStore(color = "Green")
-        #     color_interest = userInterests(hobbies = choosing_interests("green_hobbies"),
-        #                                 living_and_travel =choosing_interests("green_living_and_travel"),
-        #                                 education_and_careers=choosing_interests("green_education_and_careers"),
-        #                                 music=choosing_interests("green_music"),)
-        # elif(list_colors.index(max_value) == 3):
-        #     color_store = answersStore(color = "Gold")
-        #     color_interest = userInterests(hobbies = choosing_interests("gold_hobbies"),
-        #                                 living_and_travel =choosing_interests("gold_living_and_travel"),
-        #                                 education_and_careers=choosing_interests("gold_education_and_careers"),
-        #                                 music=choosing_interests("gold_music"),)
-        #
-        # # user_array.put()
-        # color_store.put()
-        # color_interest.put()
-        # data = {
-        #     "user_color" : color_store.color,
-        #     "user_hobbies" : color_interest.hobbies,
-        #     "user_living_and_travel": color_interest.living_and_travel,
-        #     "user_education_and_careers": color_interest.education_and_careers,
-        #     "user_music":color_interest.music
-        #     # "user_all_answers" : user_answers
-        # }
 
         user_color = ""
 
@@ -301,13 +270,18 @@ class ResultsPage(webapp2.RequestHandler):
             "user_hobbies" : color_interest.hobbies,
             "user_living_and_travel": color_interest.living_and_travel,
             "user_education_and_careers": color_interest.education_and_careers,
-            "user_music":color_interest.music
+            "user_music":color_interest.music,
+            "colorImage": getImage(user_color),
+            "hobbies_image": getImage(color_interest.hobbies),
+            "living_and_travel_image": getImage(color_interest.living_and_travel),
+            "education_and_careers_image": getImage(color_interest.education_and_careers),
+            "music_image": getImage(color_interest.music),
+            "connect_image": getImage("iphone")
             # "user_all_answers" : user_answers
         }
 
         results_template = jinja_env.get_template('pages/results.html')
         self.response.write(results_template.render(data))
-
 
 class NewUserPage(webapp2.RequestHandler):
     def get(self):
