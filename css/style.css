@@ -375,3 +375,46 @@ input[type=radio] + p{
 input[type=radio]:checked + p{
   background-color: #39A9DB;
 }
+
+/* ===============================================================================
+About page
+=============================================================================== */
+
+
+#aboutPage{
+background: url(../images/background_image_results.png);
+/* width: 100%; */
+background-repeat: no-repeat;
+background-size: cover;
+/* background: #fff; */
+font-family: 'Varela Round', sans-serif;
+}
+.aboutContents{
+  margin-left: 200px;
+  margin-right: 200px;
+
+}
+.aboutContents h4 span{
+  color: #39A9DB;
+}
+.aboutHeader{
+    padding: 10px;
+}
+.aboutHeader p{
+  font-size: 26px;
+  float:left;
+  margin-left: 15px;
+  font-family: 'Varela Round', sans-serif;
+}
+.spacingPictures{
+  display: flex;
+  justify-content: space-around;
+}
+.spacingText{
+  padding-left: 20px;
+  padding-right: 20px
+}
+.spacingText h2{
+  text-align: center;
+  text-shadow: -.5px 0 black, 0 .5px black, .5px 0 black, 0 -.5px black;
+}
