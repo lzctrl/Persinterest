@@ -18,8 +18,11 @@
         <div class="col adjsSpace" style="width: 100%">
           {%for choices1 in question1%}
           <div class="adjectives">
-            <input type="radio" name = "template" value = "{{choices1}}" required/>
-            {{choices1|safe}}
+            <label>
+              <input type="radio" name = "template" value = "{{choices1}}" required/>
+              <!-- {{choices1|safe}} -->
+              <p>{{choices1|safe}}</p>
+            </label>
           </div>
           {%endfor%}
         </div>
@@ -30,8 +33,10 @@
         <div class="col adjsSpace" style="width:100%;">
           {%for choices2 in question2%}
           <div class="adjectives">
-            <input type="radio" name = "template2" value = "{{choices2}}" required/>
-            {{choices2|safe}}
+            <label>
+              <input type="radio" name = "template2" value = "{{choices2}}" required/>
+              <p>{{choices2|safe}}</p>
+            </label>
           </div>
           {%endfor%}
         </div>
@@ -42,8 +47,10 @@
         <div class="col adjsSpace" style="width:100%;">
           {%for choices3 in question3%}
           <div class="adjectives">
-            <input type="radio" name = "template3" value = "{{choices3}}" required/>
-            {{choices3|safe}}
+            <label>
+              <input type="radio" name = "template3" value = "{{choices3}}" required/>
+              <p>{{choices3|safe}}</p>
+            </label>
           </div>
           {%endfor%}
         </div>
@@ -53,9 +60,11 @@
       <div class="row">
         <div class="col adjsSpace" style="width:100%;">
           {%for choices4 in question4%}
-          <div class="adjectives">
-            <input type="radio" name = "template4" value = "{{choices4}}" required/>
-            {{choices4|safe}}
+          <div class="adjectives" style="height: 100%;">
+            <label>
+              <input type="radio" name = "template4" value = "{{choices4}}" required/>
+              <p>{{choices4|safe}}</p>
+            </label>
           </div>
           {%endfor%}
         </div>
@@ -66,8 +75,10 @@
         <div class="col adjsSpace" style="width:100%;">
           {%for choices5 in question5%}
           <div class="adjectives">
-            <input type="radio" name = "template5" value = "{{choices5}}" required/>
-            {{choices5|safe}}
+            <label>
+              <input type="radio" name = "template5" value = "{{choices5}}" required/>
+              <p>{{choices5|safe}}</p>
+            </label>
           </div>
           {%endfor%}
         </div>

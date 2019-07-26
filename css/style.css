@@ -274,21 +274,25 @@ Personality Test page
   margin-right: 200px;
 }
 
+.adjectives {
+  text-align: center;
+}
+
 .adjsSpace{
   display: flex;
   justify-content: space-around;
 }
 
-/* input[type=radio]{
+input[type=radio]{
   postion: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-input[type=radio] + .adjectives{
+input[type=radio] + p{
   cursor: pointer;
 }
-input[type=radio]{
-
-} */
+input[type=radio]:checked + p{
+  background-color: red;
+}
