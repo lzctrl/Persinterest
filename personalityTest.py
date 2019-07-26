@@ -42,6 +42,9 @@ personalityresults = {
     "gold_living_and_travel": ["Living in mid-sized cities", "Boston", "Ann Arbor", "New England", "Toronto", "Rome", "Portland", "Syracuse"]
 
 }
+
+
+
 def choosing_interests(category):
     choose = random.randint(0, len(personalityresults[category])-1)
     interest = personalityresults[category]
