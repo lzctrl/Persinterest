@@ -54,7 +54,7 @@ Index page
   padding: 15px 5px;
 }
 
-.content h1 span {
+.content h1 span, h3 span, h5 span {
   color: #39A9DB;
 }
 
@@ -279,6 +279,10 @@ Results page
   text-decoration: none;
 }
 
+.interestWord h4 a:hover {
+  color: #222;
+}
+
 .colorRow {
   background-size: cover;
   background-repeat: no-repeat;
@@ -339,6 +343,10 @@ Personality Test page
   font-family: 'Varela Round', sans-serif;
 }
 
+.testHeader {
+  padding: 10px;
+}
+
 .testContent{
   margin-left: 200px;
   margin-right: 200px;
@@ -351,9 +359,12 @@ Personality Test page
 .adjsSpace{
   display: flex;
   justify-content: space-around;
+  background-color: #f7f7f7;
+  border-radius: 5px;
 }
 
 input[type=submit] {
+  font-size: 30px;
     padding:5px 15px;
     background:#39A9DB;
     border:0 none;
@@ -369,10 +380,9 @@ input[type=submit] {
   justify-content: center;
 }
 
-
-
 input[type=radio]{
-  postion: absolute;
+  /* postion: absolute; */
+  display: none;
   opacity: 0;
   width: 0;
   height: 0;
@@ -380,9 +390,17 @@ input[type=radio]{
 
 input[type=radio] + p{
   cursor: pointer;
+  color: #222;
+  padding: 5px;
+  border-radius: 5px;
 }
 input[type=radio]:checked + p{
   background-color: #39A9DB;
+  color: white;
+}
+
+testHeader h3 {
+  line-height: 2.5;
 }
 
 /* ===============================================================================
