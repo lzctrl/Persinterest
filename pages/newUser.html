@@ -2,18 +2,32 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="../css/style.css">
   <title>Sign Up</title>
 </head>
-<body>
-  <div class="content">
+<body id="newUserPage">
+  <div class="content centered">
     {% if isUser == False %}
     <a href="{{url}}">Sign In</a>
     {% endif %}
     {% if isUser == True %}
-      <p>You don't exist!!!</p>
+      <h1>We Could Not Find <span>You</span> In Our System!</h1>
       <form method='post' action='/'>
-        First Name: <input type='text' name='first_name'>
-        Last Initial: <input type='text' maxlength='1' name='last_initial'>
+        <label class="field a-field a-field_a1 page__field">
+      <input class="field__input a-field__input" placeholder="e.g. Johnny" required>
+      <span class="a-field__label-wrap">
+        <span class="a-field__label">First name</span>
+      </span>
+    </label>
+    <label class="field a-field a-field_a2 page__field">
+      <input class="field__input a-field__input" placeholder="e.g. A" required>
+      <span class="a-field__label-wrap">
+        <span class="a-field__label">Last initial</span>
+      </span>
+    </label>
+        <!-- <input type='text' placeholder="First Name" name='first_name' required> &nbsp; -->
+        <!-- <input type='text' placeholder="Last Initial" maxlength='1' name='last_initial' required> -->
+        <br><br><br>
         <input type='submit'>
       </form>
     {% endif %}
