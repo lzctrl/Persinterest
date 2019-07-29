@@ -48,6 +48,8 @@ In browser, open [http://localhost:8080](http://localhost:8080)
 
 - [Unsplash API](https://source.unsplash.com/)
 
+- [Google CSSI](https://buildyourfuture.withgoogle.com/programs/computer-science-summer-institute/)
+
 - [Sketch](https://www.sketch.com/)
 
 <div align="center">
