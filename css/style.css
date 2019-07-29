@@ -424,6 +424,10 @@ font-family: 'Varela Round', sans-serif;
 .aboutContents h4 span{
   color: #39A9DB;
 }
+.aboutParagraphs{
+  margin-left: 100px;
+  margin-right: 100px;
+}
 .aboutHeader{
     padding: 10px;
 }
@@ -433,15 +437,26 @@ font-family: 'Varela Round', sans-serif;
   margin-left: 15px;
   font-family: 'Varela Round', sans-serif;
 }
-.spacingPictures{
+
+.aboutRows {
   display: flex;
-  justify-content: space-around;
+  padding: 10px;
+  border-radius: 5px;
 }
-.spacingText{
-  padding-left: 20px;
-  padding-right: 20px
+
+
+.colImg{
+  /* border: 1px solid black; */
+  width: 25%;
+  min-height: 50px;
+  /* height: 100px; */
 }
-.spacingText h2{
-  text-align: center;
-  text-shadow: -.5px 0 black, 0 .5px black, .5px 0 black, 0 -.5px black;
+.colText{
+  width: 75%;
+  min-height: 50px;
+  margin-left: 35px;
+  margin-right: 35px;
+}
+.colText h2{
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
 }
