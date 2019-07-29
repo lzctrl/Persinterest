@@ -54,8 +54,12 @@ Index page
   padding: 15px 5px;
 }
 
-.content h1 span, h3 span, h5 span {
+.content h1 span, h3 span, h5 span, h4 span a {
   color: #39A9DB;
+}
+
+h4 span a {
+  text-decoration: none;
 }
 
 /* The main starter button  */

@@ -165,8 +165,20 @@ class PersonalityTestPage(webapp2.RequestHandler):
 
 class AboutPage(webapp2.RequestHandler):
     def get(self):
+
+        user = users.get_current_user()
+
+        signedIn = False
+
+        if user:
+            signedIn = True
+
+        mydict = {
+            "isSignedIn": signedIn
+        }
+
         about_page = jinja_env.get_template('pages/about.html')
-        self.response.write(about_page.render())
+        self.response.write(about_page.render(mydict))
 
 class ConnectionsPage(webapp2.RequestHandler):
     def get(self):
